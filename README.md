@@ -1,3 +1,0 @@
-# SME
-Khiliji
-Akadbambabma

@@ -1,0 +1,108 @@
+openapi: "3.0.0"
+info:
+  title: "Obtain Bearer Token"
+  description: "Obtain bearer token to use the  APIs provided by SAP Health for Patient Engagement."
+  version: "2.5"
+ 
+servers:
+- url: "https://www.sap.com/oauth"
+
+
+  
+paths:
+  /Authenticate:
+    post:
+      tags:
+      - Obtain bearer token
+      summary: "Get the bearer token to use SAP Health for Patient Engagement APIs"
+      description: "After you receive the bearer token (access_token) in the response, use it in the header of all the other API calls to the system."
+      operationId: GetBearer
+
+
+      requestBody:
+  
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/authenticate" 
+
+      responses:
+        "200":
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/bearertoken" 
+
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Weather not found
+                type: string
+                example: Not found
+      
+
+ 
+externalDocs:
+  description: Conceptual Documentation
+  url: https://nikhil-mukunda.github.io/TaskCreation/sampledocumentation
+
+components:
+
+  parameters:
+    q:
+      name: q
+      in: query
+      description: "**City name**. *Example: London*. You can call by city name, or by city name and country code. The API responds with a list of results that match a searching word. For the query value, type the city name and optionally the country code divided by a comma; use ISO 3166 country codes."
+      schema:
+        type: string
+  schemas:
+    "authenticate":
+      type: object
+      properties:
+        client_id:
+          $ref: '#/components/schemas/idEN'
+        client_secret:
+          $ref: '#/components/schemas/languagekeyEN'
+
+    "bearertoken":
+      type: object
+      properties:
+        access_token:
+          $ref: '#/components/schemas/access_token'
+        token_type:
+          $ref: '#/components/schemas/token_type'
+        expires_in:
+          $ref: '#/components/schemas/expires_in'
+
+    idEN:
+      title: client_id
+      type: string
+      description: Client ID
+      example: oRNWbHFXtAECmhnZmEndcjLIaSKbRMVE
+    languagekeyEN:
+      title: client_secret
+      type: string
+      description: Client secret
+      example: MaQHPOnmYkPZNgeRziPnQyyOJYytUbcFBVJBvbMKoDdpPqaZbaOiLUTWzPAkpPsZFZbJHrcoltdgpZolyNcgvvBaKcmkqFjucFzXhDONTsPAtHHyccQlLUZpkOuywMiOycDWcCySFsgpDiyGnCWCZJkNTtVdPxbSUTWVIFQiUxaPDYDXRQAVVTbSVZArAZkaLDLOoOvPzxSdhnkkJWzlQDkqsXNKfAIgAldrmyfROSyCGMCfvzdQdUQEaYZTPEoA
+    access_token:
+      title: access_token
+      type: string
+      description: Specifies the bearer token
+      example: utTJFMrOKwlyB5rcBpCIP6Dtn0k4w8vtqR6TJtu-fvEIm9tXTZf6q4JSaRaxRc7eSgO4EAggELN5bqADCSGq4mDEQgM-k-VPUi7IVIkKrVAFdwyb9Yz1cXy9 BspU96tZSmxjNiNzMiLCJvcmciOiJTTFI6MTMyMjAzNiIsImF6cCI6IjMwODE4NWVhLTkyZTAtNGE0NS1iNzg2LWU5MzI1OTIyM2I3MyIsImNsaWVudG5hbWUiOiJDaGFubmFWFmYyRdvKZyB4PibGUiLCJpc3MiOiJsb2dpbi5ib2wuY29tIiwic2NvcGVzIjoiQ3VzdG9tU2NvcGU0IEN1c3RvbVNjb3BlMyIsImV4cCI6MTUzOTI0NDkwMSwiaWF0IjoxNTM5MjQ0NjAxLCJhaWQiOiJTTFI6MTMyMjAzNiIsImp0aSI6IjI1YzcxZDY2LTU0YzgtNDQ3ZS04NTk0LWEwMzFlZDNkNGUzOSJ9.Nkc90mTB-BLVJEnSDHx2o1bkJ-eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIzMDgxODVlYS05MmUwLTRhNDUtYjc4Ni1lOTMyNTkyM7Dan9VaFQF1o8EvlGCV42n61KAjeEg8PrjVwqFvJ8y9QUzcpTFXQ5f4VFgIfZfYaqZyM2iJWFlpSpVl-jQAiGjOp0xSForKtGe2-FdyXmmQNpw_IltcPmvJIGABU3Xngx5O- _F13sG_zRoy7g1CBspU9dx5DLDuOa17PBmj52kQVEV8Q
+    token_type:
+      title: token_type
+      type: string
+      description: Specifies the type of token
+      example: Bearer
+      
+    expires_in:
+      title: expires_in
+      type: number
+      description: Specifies the validity period of the token
+      example: 299
+
+  
